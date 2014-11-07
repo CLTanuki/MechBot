@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MechBot</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Setting</string>
+    <string name="bot_spin_prompt">Choose Bot</string>
+    <string name="status">Status</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="list">List</string>
+    <string name="find">Find</string>
+    <string name="title_activity_main">Main Activity</string>
+    <string name="pref_sync">Sync</string>
+    <string name="pref_sync_summ">Sync SMTH</string>
+    <string name="pref_syncConnectionType">Connection Type</string>
+    <string name="pref_syncConnectionTypes_default">blabla</string>
+
+</resources>
