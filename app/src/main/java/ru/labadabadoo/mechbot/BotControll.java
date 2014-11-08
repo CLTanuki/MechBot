@@ -31,7 +31,6 @@ import java.util.UUID;
 public class BotControll extends Activity {
 
     Spinner bot_spin;
-    public ArrayAdapter<String> bot_spinnerAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
     InputStream tmpIn = null;
     OutputStream tmpOut = null;
@@ -68,8 +67,8 @@ public class BotControll extends Activity {
 
         bot_spin = (Spinner) findViewById(R.id.bot_spinner);
 
-        bot_spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, pairedDevicesList);
-        bot_spinnerAdapter.add("MechBot");
+        ArrayAdapter<String> bot_spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, pairedDevicesList);
+        bot_spinnerAdapter.add("Mech Bot");
         bot_spin.setAdapter(bot_spinnerAdapter);
         bot_spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -83,16 +82,24 @@ public class BotControll extends Activity {
                         try {
                             BluetoothSocket socket = i.createRfcommSocketToServiceRecord(UUID.fromString("00001101-" +
                                     "0000-1000-8000-00805F9B34FB"));
+                            socket.connect();
                             tmpIn = socket.getInputStream();
                             tmpOut = socket.getOutputStream();
-                            Toast.makeText(getApplicationContext(),"Connected" ,
-                                    Toast.LENGTH_LONG).show();
                         }
                         catch (IOException e) {
-                            Toast.makeText(getApplicationContext(),"Failed" ,
+                            Toast.makeText(getApplicationContext(),"Failed to set" ,
                                     Toast.LENGTH_LONG).show();
                         }
-
+                        byte[] buffer = new byte[1024];
+                        try {
+                            tmpOut.write(buffer);
+                        }
+                        catch (IOException e) {
+                            Toast.makeText(getApplicationContext(),"Failed to write" ,
+                                    Toast.LENGTH_LONG).show();
+                        }
+                        Toast.makeText(getApplicationContext(),"Written" ,
+                                Toast.LENGTH_LONG).show();
                     }
             }
 
