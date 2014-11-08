@@ -83,9 +83,9 @@ public class BotControll extends Activity {
                         try {
                             socket = i.createRfcommSocketToServiceRecord(UUID.fromString("00001101-" +
                                     "0000-1000-8000-00805F9B34FB"));
-                            socket.connect();
                             tmpIn = socket.getInputStream();
                             tmpOut = socket.getOutputStream();
+                            socket.connect();
                         }
                         catch (IOException e) {
                             Toast.makeText(getApplicationContext(),"Failed to set" ,
