@@ -34,6 +34,7 @@ public class BotControll extends Activity {
     private static final int REQUEST_ENABLE_BT = 1;
     InputStream tmpIn = null;
     OutputStream tmpOut = null;
+    public BluetoothSocket socket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +81,7 @@ public class BotControll extends Activity {
                     if (i.getName().equals(spinned_bot))
                     {
                         try {
-                            BluetoothSocket socket = i.createRfcommSocketToServiceRecord(UUID.fromString("00001101-" +
+                            socket = i.createRfcommSocketToServiceRecord(UUID.fromString("00001101-" +
                                     "0000-1000-8000-00805F9B34FB"));
                             socket.connect();
                             tmpIn = socket.getInputStream();
@@ -90,15 +91,9 @@ public class BotControll extends Activity {
                             Toast.makeText(getApplicationContext(),"Failed to set" ,
                                     Toast.LENGTH_LONG).show();
                         }
-                        byte[] buffer = new byte[1024];
-                        try {
-                            tmpOut.write(buffer);
-                        }
-                        catch (IOException e) {
-                            Toast.makeText(getApplicationContext(),"Failed to write" ,
-                                    Toast.LENGTH_LONG).show();
-                        }
-                        Toast.makeText(getApplicationContext(),"Written" ,
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(),"Select proper bot, beach!" ,
                                 Toast.LENGTH_LONG).show();
                     }
             }
@@ -108,6 +103,16 @@ public class BotControll extends Activity {
 
             }
         });
+    }
+
+    public void sendByte(byte[] bytes) {
+        try {
+            tmpOut.write(bytes);
+        }
+        catch (IOException e) {
+            Toast.makeText(getApplicationContext(), "Failed to write",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
 //    @Override
@@ -133,6 +138,32 @@ public class BotControll extends Activity {
 //        // TODO Auto-generated method stub
 //        bot_spinnerAdapter.notifyDataSetChanged();
 //    }
+
+    public void buttonPress(View v) {
+        switch (v.getId()) {
+            case R.id.red_button:
+                // do something
+                break;
+            case R.id.green_button:
+                // do something else
+                break;
+            case R.id.blue_button:
+                // i'm lazy, do nothing
+                break;
+            case R.id.arrow_up:
+                // i'm lazy, do nothing
+                break;
+            case R.id.arrow_down:
+                // i'm lazy, do nothing
+                break;
+            case R.id.arrow_left:
+                // i'm lazy, do nothing
+                break;
+            case R.id.arrow_right:
+                // i'm lazy, do nothing
+                break;
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
